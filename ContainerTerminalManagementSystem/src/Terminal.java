@@ -2,7 +2,6 @@ public class Terminal {
     private String id;
     private double chargePerDay;
     private boolean isAvailable;
-    private Customer customer;
 
     public Terminal(String id, int chargePerDay) {
         this.id = id;
@@ -19,11 +18,7 @@ public class Terminal {
     }
 
     public double getChargePerDay() {
-        if (customer.getType().equals("premier")) {
-            return chargePerDay * 0.9;
-        } else {
-            return chargePerDay;
-        }
+        return chargePerDay;
     }
 
     public void setChargePerDay(int chargePerDay) {
@@ -38,7 +33,7 @@ public class Terminal {
         return isAvailable;
     }
 
-    public void setAvailable(boolean available) {
+    public void setAvailability(boolean available) {
         isAvailable = available;
     }
 }

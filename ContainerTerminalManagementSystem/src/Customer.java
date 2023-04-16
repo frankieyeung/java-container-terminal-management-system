@@ -1,12 +1,12 @@
 public class Customer {
     private String id;
     private String name;
-
     private String type;
 
-    public Customer(String id, String name) {
+    public Customer(String id, String name, String type) {
         this.id = id;
         this.name = name;
+        this.type = type;
     }
 
     public String getId() {
@@ -35,6 +35,5 @@ public class Customer {
         } else {
             System.out.println("Customer type must be either normal or premier");
         }
-
     }
 }

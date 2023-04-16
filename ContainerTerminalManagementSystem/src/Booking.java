@@ -4,6 +4,7 @@ public class Booking {
     private Terminal terminal;
     private int days;
 
+
     public Booking(String id, Customer customer, Terminal terminal, int days) {
         this.id = id;
         this.customer = customer;
@@ -48,6 +49,10 @@ public class Booking {
     }
 
     public double calculateTotalCharges() {
-        return terminal.getChargePerDay() * days;
+        if (customer.getType().equals("premier")) {
+            return terminal.getChargePerDay() * days * 0.9;
+        } else {
+            return terminal.getChargePerDay() * days;
+        }
     }
 }
