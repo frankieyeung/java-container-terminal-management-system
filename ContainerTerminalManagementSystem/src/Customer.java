@@ -29,6 +29,7 @@ public class Customer {
         return type;
     }
 
+
     public void setType(String type) {
         if (type.equals("normal") || type.equals("premier")) {
             this.type = type;

@@ -16,34 +16,47 @@ public class PortManagement {
 
     // CRUD of Terminal
     public void addTerminal() {
-        System.out.print("Enter terminal ID: ");
+        System.out.print("\nEnter terminal ID: ");
         String id = scanner.nextLine().trim();
         System.out.print("Enter terminal charge per day: ");
-        int chargePerDay = Integer.parseInt(scanner.nextLine().trim());
-        Terminal terminal = new Terminal(id, chargePerDay);
-        terminals.put(id, terminal);
-        System.out.println("Terminal added successfully.");
+        int chargePerDay;
+        try {
+            chargePerDay = Integer.parseInt(scanner.nextLine().trim());
+            Terminal terminal = new Terminal(id, chargePerDay);
+            terminals.put(id, terminal);
+            System.out.println("Terminal added successfully.");
+        } catch (Exception e) {
+            System.out.println(e + " You did not enter a number. Terminal add failed");
+        }
     }
 
     public void showAllTerminals() {
-        for (Terminal terminal : terminals.values()) {
-            System.out.println("Terminal ID: " + terminal.getId());
-            System.out.println("Charge Per Day: $" + terminal.getChargePerDay());
-            System.out.println("");
+        if (terminals.isEmpty()) {
+            System.out.println("\nNo terminals");
+        } else {
+            for (Terminal terminal : terminals.values()) {
+                System.out.println("\nTerminal ID: " + terminal.getId());
+                System.out.println("Charge Per Day: $" + terminal.getChargePerDay());
+            }
         }
     }
 
     public void updateTerminal() {
-        System.out.println("Enter terminal ID: ");
+        System.out.println("\nEnter terminal ID: ");
         String id = scanner.nextLine().trim();
         System.out.print("Enter terminal charge per day: ");
-        int chargePerDay = Integer.parseInt(scanner.nextLine().trim());
-        terminals.get(id).setChargePerDay(chargePerDay);
-        System.out.println("Terminal update successfully");
+        int chargePerDay;
+        try {
+            chargePerDay = Integer.parseInt(scanner.nextLine().trim());
+            terminals.get(id).setChargePerDay(chargePerDay);
+            System.out.println("Terminal update successfully");
+        } catch (Exception e) {
+            System.out.println(e + " You did not enter a number. Terminal add failed");
+        }
     }
 
     public void deleteTerminal() {
-        System.out.println("Enter terminal ID: ");
+        System.out.println("\nEnter terminal ID: ");
         String id = scanner.nextLine().trim();
         terminals.remove(id);
         System.out.println("Terminal delete successfully");
@@ -51,33 +64,53 @@ public class PortManagement {
 
     // CRUD of Customer
     public void addCustomer() {
-        System.out.print("Enter customer ID: ");
+        System.out.print("\nEnter customer ID: ");
         String id = scanner.nextLine().trim();
         System.out.print("Enter customer name: ");
         String name = scanner.nextLine().trim();
-        System.out.print("Enter customer type (normal or premier): ");
-        String type = scanner.nextLine().trim();
+        String type;
+        while (true) {
+            System.out.print("Enter customer type (normal or premier): ");
+            type = scanner.nextLine().trim();
+            if (!type.equals("normal") && !type.equals("premier")) {
+                System.out.println("Customer type must be either normal or premier");
+            } else {
+                break;
+            }
+        }
         Customer customer = new Customer(id, name, type);
         customers.put(id, customer);
         System.out.println("Customer added successfully.");
     }
 
     public void showAllCustomers() {
-        for (Customer customer : customers.values()) {
-            System.out.println("Customer ID: " + customer.getId());
-            System.out.println("Customer Name: " + customer.getName());
-            System.out.println("Customer Type: " + customer.getType());
-            System.out.println("");
+        if (customers.isEmpty()) {
+            System.out.println("\nNo Customers");
+            return;
+        } else {
+            for (Customer customer : customers.values()) {
+                System.out.println("\nCustomer ID: " + customer.getId());
+                System.out.println("Customer Name: " + customer.getName());
+                System.out.println("Customer Type: " + customer.getType());
+            }
         }
     }
 
     public void updateCustomer() {
-        System.out.println("Enter customer ID: ");
+        System.out.println("\nEnter customer ID: ");
         String id = scanner.nextLine().trim();
         System.out.print("Enter customer name: ");
         String name = scanner.nextLine().trim();
-        System.out.print("Enter customer type (normal or premier): ");
-        String type = scanner.nextLine().trim();
+        String type;
+        while (true) {
+            System.out.print("Enter customer type (normal or premier): ");
+            type = scanner.nextLine().trim();
+            if (!type.equals("normal") && !type.equals("premier")) {
+                System.out.println("Customer type must be either normal or premier");
+            } else {
+                break;
+            }
+        }
         customers.get(id).setName(name);
         customers.get(id).setType(type);
         System.out.println("Customer update successfully");
@@ -91,8 +124,8 @@ public class PortManagement {
     } // End of CRUD of Custoemr
 
     // CRUD of Booking
-    public void bookTerminal() {
-        System.out.println("Enter booking ID: ");
+    public void addBooking() {
+        System.out.print("Enter booking ID: ");
         String bookingId = scanner.nextLine().trim();
         System.out.print("Enter customer ID: ");
         String customerId = scanner.nextLine().trim();
@@ -122,20 +155,27 @@ public class PortManagement {
     }
 
     public void showAllBookings() {
-        for (Booking booking : bookings.values()) {
-            System.out.println("Booking ID: " + booking.getId());
-            System.out.println("Customer ID: " + booking.getCustomer().getId());
-            System.out.println("Customer Name: " + booking.getCustomer().getName());
-            System.out.println("Customer Type: " + booking.getCustomer().getName());
-            System.out.println("Terminal ID: " + booking.getTerminal().getId());
-            System.out.println("Days: " + booking.getDays());
-            System.out.println("Total Charges: " + booking.calculateTotalCharges());
-            System.out.println("");
+        if (bookings.isEmpty()) {
+            System.out.println("\nNo Bookings");
+            return;
+        } else{
+            System.out.println("\nBooking Details");
+            for (Booking booking : bookings.values()) {
+                System.out.println("\nBooking ID: " + booking.getId());
+                System.out.println("Customer ID: " + booking.getCustomer().getId());
+                System.out.println("Customer Name: " + booking.getCustomer().getName());
+                System.out.println("Customer Type: " + booking.getCustomer().getType());
+                System.out.println("Terminal ID: " + booking.getTerminal().getId());
+                System.out.println("Charge per day: " + booking.getTerminal().getChargePerDay());
+                System.out.println("Days: " + booking.getDays());
+                System.out.println("\nTotal Charges: " + booking.calculateTotalCharges());
+            }
         }
+
     }
 
     public void updateBooking() {
-        System.out.println("Enter booking ID: ");
+        System.out.print("\nEnter booking ID: ");
         String bookingId = scanner.nextLine().trim();
         Booking booking = bookings.get(bookingId);
         if (booking == null) {
@@ -166,12 +206,9 @@ public class PortManagement {
     }
 
     public void deleteBooking() {
-        System.out.println("Enter booking ID: ");
+        System.out.println("\nEnter booking ID: ");
         String id = scanner.nextLine().trim();
         bookings.remove(id);
         System.out.println("Booking delete successfully");
-    }
-
-
-
+    } //End of CRUD of Booking
 }

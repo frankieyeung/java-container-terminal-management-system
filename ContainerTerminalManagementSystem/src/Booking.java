@@ -4,7 +4,6 @@ public class Booking {
     private Terminal terminal;
     private int days;
 
-
     public Booking(String id, Customer customer, Terminal terminal, int days) {
         this.id = id;
         this.customer = customer;
@@ -48,6 +47,7 @@ public class Booking {
         }
     }
 
+    // if customer type is premier, price 10% off
     public double calculateTotalCharges() {
         if (customer.getType().equals("premier")) {
             return terminal.getChargePerDay() * days * 0.9;

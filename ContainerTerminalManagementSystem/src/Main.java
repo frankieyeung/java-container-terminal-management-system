@@ -5,6 +5,7 @@ public class Main {
         PortManagement portManagement = new PortManagement();
         Scanner scanner = new Scanner(System.in);
 
+        // Main menu
         while (true) {
             System.out.println("\nMain Menu:");
             System.out.println("1. Terminal");
@@ -34,6 +35,7 @@ public class Main {
         }
     }
 
+    // Terminal menu
     public static void terminalMenu(PortManagement portManagement, Scanner scanner) {
         while (true) {
             System.out.println("\nTerminal Menu:");
@@ -67,6 +69,7 @@ public class Main {
         }
     }
 
+    // Customer menu
     public static void customerMenu(PortManagement portManagement, Scanner scanner) {
         while (true) {
             System.out.println("\nCustomer Menu:");
@@ -81,16 +84,16 @@ public class Main {
 
             switch (customerChoice) {
                 case 1:
-                    // Add customer
+                    portManagement.addCustomer();
                     break;
                 case 2:
-                    // Show all customers
+                    portManagement.showAllCustomers();
                     break;
                 case 3:
-                    // Update customer
+                    portManagement.updateCustomer();
                     break;
                 case 4:
-                    // Delete customer
+                    portManagement.deleteCustomer();
                     break;
                 case 5:
                     return;
@@ -100,6 +103,7 @@ public class Main {
         }
     }
 
+    // Booking menu
     public static void bookingMenu(PortManagement portManagement, Scanner scanner) {
         while (true) {
             System.out.println("\nBooking Menu:");
@@ -114,16 +118,16 @@ public class Main {
 
             switch (bookingChoice) {
                 case 1:
-                    // Add booking
+                    portManagement.addBooking();
                     break;
                 case 2:
-                    // Show all bookings
+                    portManagement.showAllBookings();
                     break;
                 case 3:
-                    // Update booking
+                    portManagement.updateBooking();
                     break;
                 case 4:
-                    // Delete booking
+                    portManagement.deleteBooking();
                     break;
                 case 5:
                     return;
@@ -133,133 +137,3 @@ public class Main {
         }
     }
 }
-
-
-//import java.util.HashMap;
-//import java.util.Map;
-//import java.util.Scanner;
-//
-//public class Main {
-//    private static final Scanner scanner = new Scanner(System.in);
-//    private static final PortManagement portManagement = new PortManagement();
-//    private static final Map<String, Customer> customers = new HashMap<>();
-//
-//    public static void main(String[] args) {
-//        boolean exit = false;
-//        while (!exit) {
-//            printMenu();
-//            String input = scanner.nextLine().trim();
-//            switch (input) {
-//                case "1":
-//                    addTerminal();
-//                    break;
-//                case "2":
-//                    showTerminal();
-//                    break;
-//                case "3":
-//                    updateTerminal();
-//                    break;
-//                case "4":
-//                    deleteTerminal();
-//                    break;
-//
-//                case "5":
-//                    exit = true;
-//                    break;
-//                default:
-//                    System.out.println("Invalid option. Please try again.");
-//            }
-//        }
-//    }
-//
-//    private static void printMenu() {
-//        System.out.println("\nPort Terminal Management System");
-//        System.out.println("1. Add Terminal");
-//        System.out.println("2. Add Customer");
-//        System.out.println("3. Book Terminal");
-//        System.out.println("4. Release Terminal");
-//        System.out.println("5. View Bookings");
-//        System.out.println("6. Exit");
-//        System.out.print("Enter your choice: ");
-//    }
-//
-//    private static void addTerminal() {
-//        System.out.print("Enter terminal ID: ");
-//        String id = scanner.nextLine().trim();
-//        System.out.print("Enter terminal charge per day: ");
-//        int chargePerDay = Integer.parseInt(scanner.nextLine().trim());
-//        Terminal terminal = new Terminal(id, chargePerDay);
-//        portManagement.addTerminal(terminal);
-//        System.out.println("Terminal added successfully.");
-//    }
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//    private static void addCustomer() {
-//        System.out.print("Enter customer ID: ");
-//        String id = scanner.nextLine().trim();
-//        System.out.print("Enter customer name: ");
-//        String name = scanner.nextLine().trim();
-//        Customer customer = new Customer(id, name);
-//        customers.put(id, customer);
-//        System.out.println("Customer added successfully.");
-//    }
-//
-
-
-
-
-
-//    private static void bookTerminal() {
-//        System.out.print("Enter customer ID: ");
-//        String customerId = scanner.nextLine().trim();
-//        Customer customer = customers.get(customerId);
-//        if (customer == null) {
-//            System.out.println("Customer not found.");
-//            return;
-//        }
-//
-//        System.out.print("Enter terminal ID: ");
-//        String terminalId = scanner.nextLine().trim();
-//        System.out.print("Enter number of days: ");
-//        int days = Integer.parseInt(scanner.nextLine().trim());
-//
-//        if (portManagement.bookTerminal(customer, terminalId, days)) {
-//            System.out.println("Terminal booked successfully.");
-//        } else {
-//            System.out.println("Terminal booking failed. Terminal not available.");
-//        }
-//    }
-//
-//    private static void releaseTerminal() {
-//        System.out.print("Enter terminal ID: ");
-//        String terminalId = scanner.nextLine().trim();
-//        if (portManagement.releaseTerminal(terminalId)) {
-//            System.out.println("Terminal released successfully.");
-//        } else {
-//            System.out.println("Terminal release failed. Terminal not found or not booked.");
-//        }
-//    }
-//
-//    private static void viewBookings() {
-//        System.out.println("\nActive Bookings:");
-//        for (String terminalId : portManagement.getActiveBookings().keySet()) {
-//            Booking booking = portManagement.getActiveBooking(terminalId);
-//            System.out.println("Booking ID: " + booking.getId() +
-//                    "\nCustomer ID: " + booking.getCustomer().getId() +
-//                    "\nCustomer Name: " + booking.getCustomer().getName() +
-//                    "\nTerminal ID: " + booking.getTerminal().getId() +
-//                    "\nDays: " + booking.getDays() +
-//                    "\nTotal Charges: " + booking.calculateTotalCharges() + "\n");
-//        }
-//    }
-
-
